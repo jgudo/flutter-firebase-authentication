@@ -1,17 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mobily/model/auth.dart';
-import 'package:mobily/screens/signup.dart';
+import 'package:mobily/screens/login.dart';
 import 'package:provider/provider.dart';
 
-class Login extends StatefulWidget {
-  static String route = '/login';
+class SignUp extends StatefulWidget {
+  static String route = '/signup';
 
   @override
-  _LoginState createState() => _LoginState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _LoginState extends State<Login> {
+class _SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
   final RegExp _emailRegex = RegExp(r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
   TextEditingController _emailController = TextEditingController();
@@ -80,7 +80,7 @@ class _LoginState extends State<Login> {
         if (_formKey.currentState!.validate()) {
 
           try {
-            await Provider.of<AuthProvider>(context, listen: false).signIn(
+            await Provider.of<AuthProvider>(context, listen: false).signUp(
               email: _emailController.text, 
               password: _passwordController.text
             );
@@ -97,13 +97,13 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget _createAccountWidget() {
+  Widget _loginButtonWidget() {
     return TextButton(
       onPressed: () {
-        Navigator.pushNamed(context, SignUp.route);
+        Navigator.pushNamed(context, Login.route);
       }, 
       child: Text(
-        'I don\'t have an account',
+        'I already have an account',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.blue
@@ -128,7 +128,7 @@ class _LoginState extends State<Login> {
                     FlutterLogo(size: 50),
                     SizedBox(height: 10),
                     Text(
-                      'Login to Mobily', 
+                      'Create your Account', 
                       style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold
@@ -141,7 +141,7 @@ class _LoginState extends State<Login> {
                     SizedBox(height: 10),
                     _submitButtonWidget(context),
                     SizedBox(height: 10),
-                    _createAccountWidget()
+                    _loginButtonWidget()
                   ],
                 )
               )

@@ -15,9 +15,14 @@ class AuthProvider extends ChangeNotifier {
 
   Stream<User?> get onAuthStateChanged => _auth.authStateChanges();
 
-
   Future<void> signIn({required String email, required String password}) async {
     await _auth.signInWithEmailAndPassword(email: email, password: password);
+    notifyListeners();
+  }
+
+  Future<void> signUp({ required String email, required String password }) async {
+    await _auth.createUserWithEmailAndPassword(email: email, password: password);
+
     notifyListeners();
   }
 }

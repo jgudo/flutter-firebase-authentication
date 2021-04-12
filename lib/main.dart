@@ -7,6 +7,7 @@ import 'package:mobily/model/auth.dart';
 import 'package:mobily/model/user.dart';
 import 'package:mobily/screens/home.dart';
 import 'package:mobily/screens/login.dart';
+import 'package:mobily/screens/signup.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {
@@ -28,7 +29,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primaryColor: Colors.blue),
-      home: PageController()
+      home: PageController(),
+      routes: <String, WidgetBuilder> {
+        Login.route: (_) => Login(),
+        Home.route: (_) => Home(),
+        SignUp.route: (_) => SignUp()
+      }
     );
   }
 }

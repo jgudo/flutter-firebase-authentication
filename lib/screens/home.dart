@@ -15,11 +15,12 @@ class Home extends StatelessWidget {
           backgroundColor: Colors.grey[200],
         )
       ),
-      title: Text('${user.name['first']} ${user.name['last']}',
-            style: TextStyle(
-              fontSize: 20
-            )
-          ),
+      title: Text(
+        '${user.name['first']} ${user.name['last']}',
+        style: TextStyle(
+          fontSize: 20
+        )
+      ),
       subtitle: Text(user.email),
       onTap: () {
         Navigator.push(
@@ -34,7 +35,21 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home')
+        title: Text('Home'),
+        actions: [
+          TextButton.icon(
+            label: Text(
+              'Logout', 
+              style: TextStyle(
+                color: Colors.white
+              )
+            ),
+            icon: Icon(Icons.logout, color: Colors.white),
+            onPressed: () {
+
+            },
+          )
+        ],
       ),
       body: FutureBuilder<List<UserModel>>(
         future: Provider.of<UserProvider>(context, listen: false).getUsers(),
